@@ -33,6 +33,10 @@ makeCacheMatrix <- function(x = matrix()) {
 ## If the inverse of the matrix is cached it returns the cached information
 ## If the inverse of the matrix is not cached it will calculate the inverse
 ##    of the matrix, set it in cache and return the information
+##      1. Get cached data if it exists
+##      2. Get data to cache if it does not exist in cache
+##      3. Cache data
+##      4. Return cached data
 
 cacheSolve <- function(x, ...) {
         cacheX <- x$getinverse()
@@ -42,14 +46,14 @@ cacheSolve <- function(x, ...) {
                 print("Getting cached data.")
                 return(cacheX)
         }
-        ## Getting cached data if it does not exist
+        ## Getting data to cache if it does not exist
         data <- x$get()
         cacheX <- solve(data, ...)
         
-        ## cached data
+        ## Cache data
         x$setinverse(cacheX)
         print("Caching data")
         
-        ## return cached data
+        ## Return cached data
         cacheX
 }
